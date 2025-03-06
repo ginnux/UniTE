@@ -32,7 +32,7 @@ class Trajectory2VecEncoder(nn.Module):
         return ht.permute(1, 0, 2)
 
 
-class Trajectory2vecDecoder(nn.Module):
+class Trajectory2VecDecoder(nn.Module):
     def __init__(self, sampler, input_size, hidden_size, seq_num, device):
         super().__init__()
         self.name = f'Trajectory2Vec_decoder_{input_size}_{hidden_size}_{seq_num}'

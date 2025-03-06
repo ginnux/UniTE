@@ -77,81 +77,114 @@ def main():
         # Create model based on name
         model_name = model_entry['name']
         if model_name == 'ia':
-            return modules.model.induced_att.InducedAttEncoder(sampler=sampler, **model_config)
+            from modules.model.induced_att import InducedAttEncoder
+            return InducedAttEncoder(sampler=sampler, **model_config)
         elif model_name == 'transformer_encoder':
-            return modules.model.transformer.TransformerEncoder(sampler=sampler, **model_config)
+            from modules.model.transformer import TransformerEncoder
+            return TransformerEncoder(sampler=sampler, **model_config)
         elif model_name == 'transformer_decoder':
-            return modules.model.transformer.TransformerDecoder(**model_config)
+            from modules.model.transformer import TransformerDecoder
+            return TransformerDecoder(**model_config)
         elif model_name == 'transformer_denoiser':
-            return modules.model.transformer.TransformerDenoiser(**model_config)
+            from modules.model.transformer import TransformerDenoiser
+            return TransformerDenoiser(**model_config)
         elif model_name == 'dualpos_transformer':
-            return modules.model.transformer.DualPosTransformer(sampler=sampler, **model_config)
+            from modules.model.transformer import DualPosTransformer
+            return DualPosTransformer(sampler=sampler, **model_config)
         elif model_name == 'mlm_transformer':
-            return modules.model.transformer.MLMTransformer(sampler=sampler, **model_config)
+            from modules.model.transformer import MLMTransformer
+            return MLMTransformer(sampler=sampler, **model_config)
         elif model_name == 'cde':
-            return modules.model.ode.CDEEncoder(sampler=sampler, **model_config)
+            from modules.model.ode import CDEEncoder
+            return CDEEncoder(sampler=sampler, **model_config)
         elif model_name == 'coa':
-            return modules.model.ode.CoeffAttEncoder(sampler=sampler, **model_config)
+            from modules.model.ode import CoeffAttEncoder
+            return CoeffAttEncoder(sampler=sampler, **model_config)
         elif model_name == 'stode':
-            return modules.model.ode.STODEEncoder(sampler=sampler, **model_config)
+            from modules.model.ode import STODEEncoder
+            return STODEEncoder(sampler=sampler, **model_config)
         elif model_name == 'trajode_decoder':
-            return modules.model.ode.TrajODEDecoder(**model_config)
+            from modules.model.ode import TrajODEDecoder
+            return TrajODEDecoder(**model_config)
         elif model_name == 'rnn_encoder':
-            return modules.model.rnn.RnnEncoder(sampler=sampler, num_embed=num_roads, **model_config)
+            from modules.model.rnn import RnnEncoder
+            return RnnEncoder(sampler=sampler, num_embed=num_roads, **model_config)
         elif model_name == 'rnn_decoder':
-            return modules.model.rnn.RnnDecoder(num_roads=num_roads, **model_config)
+            from modules.model.rnn import RnnDecoder
+            return RnnDecoder(num_roads=num_roads, **model_config)
         elif model_name == 'gmvsae_encoder':
-            return modules.model.gmvsae.GMVSAEEncoder(num_embed=num_roads, sampler=sampler, **model_config)
+            from modules.model.gmvsae import GMVSAEEncoder
+            return GMVSAEEncoder(num_embed=num_roads, sampler=sampler, **model_config)
         elif model_name == 'gmvsae_decoder':
-            return modules.model.gmvsae.GMVSAEDecoder(num_embed=num_roads, **model_config)
+            from modules.model.gmvsae import GMVSAEDecoder
+            return GMVSAEDecoder(num_embed=num_roads, **model_config)
         elif model_name == 'bert':
-            return modules.model.start.BERTEncoder(sampler=sampler, vocab_size=num_roads, **model_config)
+            from modules.model.start import BERTEncoder
+            return BERTEncoder(sampler=sampler, vocab_size=num_roads, **model_config)
         elif model_name == 'trajectory2vec_encoder':
-            return modules.model.trajectory2vec.Trajectory2VecEncoder(sampler=sampler, **model_config)
+            from modules.model.trajectory2vec import Trajectory2VecEncoder
+            return Trajectory2VecEncoder(sampler=sampler, **model_config)
         elif model_name == 'trajectory2vec_decoder':
-            return modules.model.trajectory2vec.Trajectory2vecDecoder(sampler=sampler, **model_config)
+            from modules.model.trajectory2vec import Trajectory2VecDecoder
+            return Trajectory2VecDecoder(sampler=sampler, **model_config)
         elif model_name == 'trajsim_embedding':
-            model = modules.model.trajectorysim.TrajSimEmbed(meta_dir=data.meta_dir, **model_config, pretrain=pretrain)
+            from modules.model.trajectorysim import TrajSimEmbed
+            model = TrajSimEmbed(meta_dir=data.meta_dir, **model_config, pretrain=pretrain)
             vocab_size = model.vocab_size
             dist_path = model.dist_path
             return model
         elif model_name == 'trajsim_encoder':
-            return modules.model.trajectorysim.TrajSimEncoder(num_embed=num_roads, sampler=sampler, **model_config)
+            from modules.model.trajectorysim import TrajSimEncoder
+            return TrajSimEncoder(num_embed=num_roads, sampler=sampler, **model_config)
         elif model_name == 'trajsim_decoder':
-            model = modules.model.trajectorysim.TrajSimDecoder(**model_config)
+            from modules.model.trajectorysim import TrajSimDecoder
+            model = TrajSimDecoder(**model_config)
             hidden_size = model.hidden_size
             return model
         elif model_name == 't2vecEmbedding':
-            model = modules.model.t2vec.t2vecEmbedding(meta_dir=data.meta_dir, **model_config, pretrain=pretrain)
+            from modules.model.t2vec import t2vecEmbedding
+            model = t2vecEmbedding(meta_dir=data.meta_dir, **model_config, pretrain=pretrain)
             vocab_size = model.vocab_size
             dist_path = model.dist_path
             return model
         elif model_name == 't2vecEncoder':
-            return modules.model.t2vec.t2vecEncoder(num_embed=num_roads, sampler=sampler, **model_config)
+            from modules.model.t2vec import t2vecEncoder
+            return t2vecEncoder(num_embed=num_roads, sampler=sampler, **model_config)
         elif model_name == 't2vecDecoder':
-            model = modules.model.t2vec.t2vecDecoder(**model_config)
+            from modules.model.t2vec import t2vecDecoder
+            model = t2vecDecoder(**model_config)
             hidden_size = model.hidden_size
             return model
         elif model_name == 'traj2vec_encoder':
-            return modules.model.trembr.Traj2VecEncoder(num_embed=num_roads, sampler=sampler, **model_config)
+            from modules.model.trembr import Traj2VecEncoder
+            return Traj2VecEncoder(num_embed=num_roads, sampler=sampler, **model_config)
         elif model_name == 'traj2vec_decoder':
-            return modules.model.trembr.Traj2VecDecoder(**model_config)
+            from modules.model.trembr import Traj2VecDecoder
+            return Traj2VecDecoder(**model_config)
         elif model_name == 'cae_encoder':
-            return modules.model.cnn.CNNEncoder(sampler=sampler, **model_config)
+            from modules.model.cnn import CNNEncoder
+            return CNNEncoder(sampler=sampler, **model_config)
         elif model_name == 'cae_decoder':
-            return modules.model.cnn.CNNDecoder(**model_config)
+            from modules.model.cnn import CNNDecoder
+            return CNNDecoder(**model_config)
         elif model_name == 'geoconstrains_skipgram':
-            return modules.model.word2vec.GeoConstrainSkipGramEncoder(sampler=sampler, **model_config)
+            from modules.model.word2vec import GeoConstrainSkipGramEncoder
+            return GeoConstrainSkipGramEncoder(sampler=sampler, **model_config)
         elif model_name == 'dual_view_encoder':
-            return modules.model.dual_view.DualViewEncoder(sampler=sampler, num_users=num_classes, **model_config)
+            from modules.model.dual_view import DualViewEncoder
+            return DualViewEncoder(sampler=sampler, num_users=num_classes, **model_config)
         elif model_name == 'robustDAAEncoder':
-            return modules.model.robustDAA.RobustDAA_Encoder(sampler=sampler, **model_config)
+            from modules.model.robustDAA import RobustDAA_Encoder
+            return RobustDAA_Encoder(sampler=sampler, **model_config)
         elif model_name == 'robustDAADecoder':
-            return modules.model.robustDAA.RobustDAA_Decoder(**model_config)
+            from modules.model.robustDAA import RobustDAA_Decoder
+            return RobustDAA_Decoder(**model_config)
         elif model_name == 'robustDAA_attention':
-            return modules.model.robustDAA.RobustDAA_Attention(**model_config)
+            from modules.model.robustDAA import RobustDAA_Attention
+            return RobustDAA_Attention(**model_config)
         elif model_name == 'maerrcdvit':
-            return modules.model.light_path.MAERRCD(sampler=sampler, num_roads=num_roads, **model_config)
+            from modules.model.light_path import MAERRCD
+            return MAERRCD(sampler=sampler, num_roads=num_roads, **model_config)
         else:
             raise NotImplementedError(f'No model called "{model_name}".')
 
